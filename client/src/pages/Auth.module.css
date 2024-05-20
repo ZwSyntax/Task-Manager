@@ -1,0 +1,135 @@
+.auth-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+  position: relative;
+  height: 100dvh;
+}
+
+.auth-container-sub {
+  width: 25%;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 20px;
+  background-color: rgba(105, 92, 254, 0.16);
+  padding: 20px 20px;
+  border: 1px solid #695cfe;
+  border-radius: 14px;
+  backdrop-filter: blur(40px);
+  height: fit-content;
+}
+
+.auth-type {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login,
+.signup {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: #2c2c2c;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.login {
+  background-color: rgba(107, 6, 147, 0.08);
+  border-top: 2px solid rgba(156, 30, 224, 0.44);
+  border-right: 2px solid rgba(156, 30, 224, 0.44);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.signup {
+  border-bottom: 2px solid rgba(156, 30, 224, 0.44);
+  border-top-left-radius: 8px;
+}
+
+.auth-signup .login {
+  background-color: transparent;
+  border-top: none;
+  border-right: none;
+  border-bottom: 2px solid rgba(156, 30, 224, 0.44);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.auth-signup .signup {
+  background-color: rgba(107, 6, 147, 0.08);
+  border-top: 2px solid rgba(156, 30, 224, 0.44);
+  border-left: 2px solid rgba(156, 30, 224, 0.44);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom: none;
+  border-right: none;
+  border-top-left-radius: 8px;
+}
+
+.logo-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: #2c2c2c;
+}
+
+.logo-section img {
+  width: 35px;
+  height: 35px;
+}
+
+.auth-design {
+  position: absolute;
+  background-color: rgba(111, 32, 164, 0.65);
+  width: 100%;
+  height: 300px;
+  z-index: -1;
+  bottom: 0;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 25%;
+}
+
+@media (max-width: 1300px) {
+  .auth-container-sub {
+    width: 35%;
+  }
+
+  .auth-design {
+    height: 250px;
+  }
+}
+
+@media (max-width: 950px) {
+  .auth-container-sub {
+    width: 45%;
+  }
+
+  .auth-design {
+    height: 240px;
+  }
+}
+
+@media (max-width: 650px) {
+  .auth-container-sub {
+    width: 55%;
+  }
+}
+
+@media (max-width: 500px) {
+  .auth-container-sub {
+    width: 70%;
+  }
+}
+
+@media (max-width: 350px) {
+  .auth-container-sub {
+    width: 90%;
+  }
+}

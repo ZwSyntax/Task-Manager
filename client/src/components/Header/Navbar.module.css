@@ -58,13 +58,13 @@
   height: 36px;
   padding-left: 10px;
   border-radius: 18px;
-  border: 1px solid #4338c7;
+  border: 1px solid rgb(46, 33, 213);
   font-size: 15px;
   color: #313131;
   padding-right: 35px;
   transition: 0.4s ease-in-out;
-  background-color: #695cfe;
-  color: white;
+  background-color: rgba(105, 92, 254, 0.63);
+  color: #1f1f1f;
 }
 
 .show-search input {
@@ -72,7 +72,7 @@
 }
 
 .search input::placeholder {
-  color: #dcdcdc;
+  color: #212121;
 }
 
 .search input:focus {
@@ -120,17 +120,19 @@
   bottom: -165px;
   left: -142px;
   z-index: 4;
-  background-color: #d4d1fd;
+  background-color: rgba(212, 209, 253, 0.44);
   width: 200px;
   height: 150px;
   border-radius: 12px;
   border: 1px solid #4338c7;
   padding-inline: 5px;
+  backdrop-filter: blur(40px);
 }
 
 .profile {
   margin-top: 40px;
-  background-color: rgba(196, 120, 243, 0.18);
+  background-color: rgba(196, 120, 243, 0.41);
+  border: 1px solid #6b0693;
 }
 
 .profile,
@@ -144,11 +146,12 @@
 }
 
 .profile:hover {
-  background-color: rgba(196, 120, 243, 0.31);
+  background-color: rgba(196, 120, 243, 0.48);
 }
 
 .logout {
   background-color: rgba(255, 0, 0, 0.38);
+  border: 1px solid rgba(255, 0, 0, 0.38);
 }
 .logout:hover {
   background-color: rgba(255, 0, 0, 0.45);
