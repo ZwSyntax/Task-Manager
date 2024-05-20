@@ -1,0 +1,64 @@
+.new-task-container {
+  padding-inline: 20px;
+  padding-block: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.new-task-container-sub {
+  padding-inline: 20px;
+  padding-block: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #611fbb;
+  border-radius: 12px;
+  background-color: rgba(185, 146, 245, 0.14);
+  max-width: 400px;
+  width: 100%;
+}
+
+.new-task-container form {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 10px;
+}
+
+.new-task-container input {
+  width: 300px;
+}
+
+.new-task-container input:focus,
+.new-task-container select:focus {
+  outline: none;
+}
+
+.new-task-container input::placeholder {
+  color: #1c1c1c;
+  font-size: 15px;
+}
+.new-task-container input,
+.new-task-container select {
+  background-color: rgba(105, 92, 254, 0.52);
+  height: 40px;
+  color: #1c1c1c;
+  border: 1px solid #695cfe;
+  border-radius: 8px;
+  padding-left: 10px;
+  font-size: 15px;
+}
+
+.new-task-container-sub button {
+  width: 120px;
+  padding: 10px 5px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #6c9a3c;
+  background-color: #7cb432;
+  color: #2c2c2c;
+  cursor: pointer;
+}
+
+.new-task-container-sub button:hover {
+  background-color: #689825;
+}

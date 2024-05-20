@@ -42,6 +42,16 @@
   background-color: #6c9a3c;
 }
 
+.close-task {
+  background-color: rgba(255, 0, 0, 0.7);
+  border: 1px solid rgba(255, 0, 25, 0.9);
+}
+
+.close-task:hover {
+  background-color: rgba(255, 0, 0, 0.79);
+  border: 1px solid rgba(255, 0, 25, 0.9);
+}
+
 .create-task p {
   font-size: 14px;
   color: white;
