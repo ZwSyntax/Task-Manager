@@ -6,6 +6,7 @@ import sunLogo from "./lightmode/icons8-sun-96.png";
 
 import plusLogo from "./icons8-plus-48.png";
 import userLogo from "./icons8-user-96.png";
+import taskMasterLogo from "./png-translogo.png";
 
 export {
   threeDotLightLogo,
@@ -15,4 +16,5 @@ export {
   sunLogo,
   userLogo,
   plusLogo,
+  taskMasterLogo,
 };
