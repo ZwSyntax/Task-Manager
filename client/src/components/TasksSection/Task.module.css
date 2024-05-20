@@ -13,6 +13,10 @@
   background-color: rgba(212, 209, 247, 0.27);
 }
 
+.task-container table tr:hover {
+  background-color: rgba(212, 209, 247, 0.16);
+}
+
 .task-container table tr:first-child {
   background-color: rgba(212, 209, 247, 0.56);
 }

@@ -6,9 +6,11 @@ import {
   userLogo,
 } from "../../assets/index.js";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isShowSeach, setShowSeach] = useState(false);
+  const location = useLocation();
 
   const showSeachHandler = (value) => {
     setShowSeach(value);
@@ -21,21 +23,26 @@ const Navbar = () => {
         <h3>TaskMaster</h3>
       </div>
       <div className={styles["action-container"]}>
-        <div
-          className={`${styles["search"]} ${isShowSeach ? styles["show-search"] : ""}`}
-        >
-          <button onMouseEnter={() => showSeachHandler(true)}>
-            <img src={searchLightLogo} alt={"searchLogo"} />
-          </button>
-          <input
-            autoComplete={"off"}
-            type="text"
-            name="search"
-            placeholder="Search"
-            onMouseEnter={() => showSeachHandler(true)}
-            onMouseLeave={() => showSeachHandler(false)}
-          />
-        </div>
+        {location.pathname === "/" ? (
+          <div
+            className={`${styles["search"]} ${isShowSeach ? styles["show-search"] : ""}`}
+          >
+            <button onMouseEnter={() => showSeachHandler(true)}>
+              <img src={searchLightLogo} alt={"searchLogo"} />
+            </button>
+            <input
+              autoComplete={"off"}
+              type="text"
+              name="search"
+              placeholder="Search"
+              onMouseEnter={() => showSeachHandler(true)}
+              onMouseLeave={() => showSeachHandler(false)}
+            />
+          </div>
+        ) : (
+          ""
+        )}
+
         <div className={styles["theme-mode"]}>
           <img src={sunLogo} alt={"sunLogo"} />
         </div>

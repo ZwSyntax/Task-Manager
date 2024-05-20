@@ -43,6 +43,54 @@ const Task = () => {
             </div>
           </td>
         </tr>
+        <tr>
+          <td>Design Wireframe</td>
+          <td>Sep 04, 2018</td>
+          <td>
+            <div className={styles["progress-section"]}>
+              <div className={styles["dot"]}></div>
+              <p>In Progress</p>
+            </div>
+          </td>
+          <td>
+            <div className={styles["priority-flag"]}>
+              <img src={redFlag} alt={"red flag"} />
+            </div>
+          </td>
+          <td>
+            <div className={styles["three-dot-option-section"]}>
+              <img
+                className={styles["three-dot-options"]}
+                src={threeDotLightLogo}
+                alt={"threeDotLight"}
+              />
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Design Wireframe</td>
+          <td>Sep 04, 2018</td>
+          <td>
+            <div className={styles["progress-section"]}>
+              <div className={styles["dot"]}></div>
+              <p>In Progress</p>
+            </div>
+          </td>
+          <td>
+            <div className={styles["priority-flag"]}>
+              <img src={redFlag} alt={"red flag"} />
+            </div>
+          </td>
+          <td>
+            <div className={styles["three-dot-option-section"]}>
+              <img
+                className={styles["three-dot-options"]}
+                src={threeDotLightLogo}
+                alt={"threeDotLight"}
+              />
+            </div>
+          </td>
+        </tr>
       </table>
     </div>
   );
