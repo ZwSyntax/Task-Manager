@@ -5,6 +5,7 @@ import sortLightLogo from "./lightmode/icons8-sort-50.png";
 import sunLogo from "./lightmode/icons8-sun-96.png";
 import profileLightLogo from "./lightmode/profile.png";
 import securityLightLogo from "./lightmode/security.png";
+import crosLight from "./lightmode/icons8-cross-50.png";
 
 import plusLogo from "./icons8-plus-48.png";
 import userLogo from "./icons8-user-96.png";
@@ -27,4 +28,5 @@ export {
   blueFlag,
   profileLightLogo,
   securityLightLogo,
+  crosLight,
 };

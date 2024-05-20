@@ -17,6 +17,7 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
 }
 
 .nav-container__logo img {
@@ -106,9 +107,72 @@
   cursor: pointer;
   border-radius: 50%;
   border: 1px solid #4338c7;
+  position: relative;
 }
 
 .profile-logo img {
   width: 40px;
   height: 40px;
+}
+
+.profile-options {
+  position: absolute;
+  bottom: -165px;
+  left: -142px;
+  z-index: 4;
+  background-color: #d4d1fd;
+  width: 200px;
+  height: 150px;
+  border-radius: 12px;
+  border: 1px solid #4338c7;
+  padding-inline: 5px;
+}
+
+.profile {
+  margin-top: 40px;
+  background-color: rgba(196, 120, 243, 0.18);
+}
+
+.profile,
+.logout {
+  margin-bottom: 10px;
+  padding-block: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #444444;
+  font-weight: 700;
+}
+
+.profile:hover {
+  background-color: rgba(196, 120, 243, 0.31);
+}
+
+.logout {
+  background-color: rgba(255, 0, 0, 0.38);
+}
+.logout:hover {
+  background-color: rgba(255, 0, 0, 0.45);
+}
+
+.cross {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid #4338c7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+}
+
+.cross:hover {
+  background-color: rgba(196, 120, 243, 0.24);
+}
+
+.cross img {
+  width: 25px;
+  height: 25px;
 }

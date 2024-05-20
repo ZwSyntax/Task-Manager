@@ -13,3 +13,7 @@ html {
   scroll-behavior: smooth;
   background-color: rgba(67, 56, 199, 0.05);
 }
+
+a {
+  text-decoration: none;
+}
