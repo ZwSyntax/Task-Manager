@@ -11,9 +11,23 @@ import { useState } from "react";
 
 const Tasks = () => {
   const [isNewTask, setIsNewTask] = useState(true);
+  const [isFilterShow, setIsFilterShow] = useState(false);
+  const [isShortShow, setIsShortShow] = useState(false);
 
-  const newTaskHandler = (value) => {
+  const newTaskHandler = () => {
     setIsNewTask((pre) => !pre);
+  };
+
+  const filterHandler = (value, e) => {
+    e.stopPropagation();
+    setIsFilterShow(value);
+    setIsShortShow(false);
+  };
+
+  const shorterHandler = (value, e) => {
+    e.stopPropagation();
+    setIsShortShow(value);
+    setIsFilterShow(false);
   };
 
   return (
@@ -30,11 +44,51 @@ const Tasks = () => {
             </div>
             {isNewTask ? <p>Close New</p> : <p>Add New</p>}
           </div>
-          <div className={styles["filter"]}>
-            <img src={filterLightLogo} alt={"filter"} />
+          <div
+            className={styles["filter"]}
+            onClick={() => filterHandler(true, e)}
+          >
+            <img
+              onClick={(e) => filterHandler(true, e)}
+              src={filterLightLogo}
+              alt={"filter"}
+            />
+            {isFilterShow && (
+              <div
+                className={styles["filter-options"]}
+                onMouseLeave={(e) => filterHandler(false, e)}
+              >
+                <p onClick={(e) => filterHandler(false, e)}>Completed</p>
+                <p onClick={(e) => filterHandler(false, e)}>Pending</p>
+                <div
+                  onClick={(e) => filterHandler(false, e)}
+                  className={styles["filter-cross"]}
+                >
+                  <img src={crosLight} alt={"cross"} />
+                </div>
+              </div>
+            )}
           </div>
-          <div className={styles["sort"]}>
+          <div
+            className={styles["sort"]}
+            onClick={(e) => shorterHandler(true, e)}
+          >
             <img src={sortLightLogo} alt={"sort"} />
+            {isShortShow && (
+              <div
+                className={styles["sort-options"]}
+                onMouseLeave={(e) => shorterHandler(false, e)}
+              >
+                <p onClick={(e) => shorterHandler(false, e)}>Date</p>
+                <p onClick={(e) => shorterHandler(false, e)}>Priority</p>
+                <div
+                  onClick={(e) => shorterHandler(false, e)}
+                  className={styles["filter-cross"]}
+                >
+                  <img src={crosLight} alt={"cross"} />
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

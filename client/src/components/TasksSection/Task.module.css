@@ -74,7 +74,7 @@ td {
 }
 
 .three-dot-header,
-.three-dot-options {
+.three-dot-option-img {
   width: 20px;
   height: 20px;
   filter: brightness(50%);
@@ -87,15 +87,64 @@ td {
   width: 28px;
   height: 28px;
   border-radius: 50%;
+  position: relative;
 }
 
 .three-dot-option-section:hover {
   background-color: rgba(105, 92, 254, 0.37);
 }
 
-.three-dot-options {
+.three-dot-option-img {
   transform: rotate(90deg);
   cursor: pointer;
+}
+
+.three-dot-option {
+  position: absolute;
+  z-index: 5;
+  background-color: rgba(105, 30, 155, 0.08);
+  padding: 10px 2px;
+  border-radius: 5px;
+  border: 1px solid #695cfe;
+  backdrop-filter: blur(40px);
+  width: 120px;
+  left: -140px;
+}
+
+.three-dot-option p {
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: rgba(138, 60, 173, 0.2);
+  cursor: pointer;
+}
+
+.three-dot-option p:first-child {
+  background-color: rgba(72, 170, 206, 0.5);
+  border: 1px solid rgba(15, 56, 190, 0.83);
+}
+
+.three-dot-option p:first-child:hover {
+  background-color: rgba(51, 161, 203, 0.5);
+  border: 1px solid rgba(9, 47, 169, 0.83);
+}
+
+.three-dot-option p:nth-child(2) {
+  background-color: rgba(206, 72, 72, 0.5);
+  border: 1px solid rgba(190, 15, 15, 0.83);
+}
+.three-dot-option p:nth-child(2):hover {
+  background-color: rgba(204, 56, 56, 0.5);
+  border: 1px solid rgba(173, 11, 11, 0.83);
+}
+
+.three-dot-option p:last-child {
+  background-color: rgba(140, 206, 72, 0.5);
+  border: 1px solid rgba(109, 190, 15, 0.83);
+}
+.three-dot-option p:last-child:hover {
+  background-color: rgba(117, 204, 31, 0.5);
+  border: 1px solid rgba(113, 208, 6, 0.83);
 }
 
 .priority-flag {

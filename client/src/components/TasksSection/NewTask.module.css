@@ -39,7 +39,7 @@
 }
 .new-task-container input,
 .new-task-container select {
-  background-color: rgba(105, 92, 254, 0.52);
+  background-color: rgba(105, 92, 254, 0.22);
   height: 40px;
   color: #1c1c1c;
   border: 1px solid #695cfe;
@@ -54,11 +54,11 @@
   font-size: 14px;
   border-radius: 8px;
   border: 1px solid #6c9a3c;
-  background-color: #7cb432;
+  background-color: #9cd553;
   color: #2c2c2c;
   cursor: pointer;
 }
 
 .new-task-container-sub button:hover {
-  background-color: #689825;
+  background-color: #95ce4e;
 }

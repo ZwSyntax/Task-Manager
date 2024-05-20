@@ -65,7 +65,10 @@ const Navbar = () => {
         >
           <img src={userLogo} alt={"userlogo"} />
           {isProfile && (
-            <div className={styles["profile-options"]}>
+            <div
+              className={styles["profile-options"]}
+              onMouseLeave={(e) => profileHandler(false, e)}
+            >
               <Link to={"/profile"}>
                 <div
                   className={styles["profile"]}
