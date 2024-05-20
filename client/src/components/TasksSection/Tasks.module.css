@@ -1,0 +1,85 @@
+.tasks-container {
+  width: 100%;
+  margin: 20px auto;
+  padding-inline: 20px;
+}
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-header p {
+  font-size: 20px;
+  font-weight: 500;
+  color: #313131;
+}
+
+.task-header-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.create-task {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #7aad4a;
+  height: 38px;
+  width: 120px;
+  border-radius: 20px;
+  gap: 10px;
+  cursor: pointer;
+  border: 1px solid #7ec52d;
+}
+
+.create-task:hover {
+  background-color: #6c9a3c;
+}
+
+.create-task p {
+  font-size: 14px;
+  color: white;
+}
+
+.create-task-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 26px;
+  width: 26px;
+  background-color: white;
+  border-radius: 50%;
+  border: 1px solid #4a7c0e;
+}
+
+.create-task img {
+  width: 24px;
+  height: 24px;
+}
+
+.filter,
+.sort {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 38px;
+  border: 1px solid #4338c7;
+  width: 38px;
+  border-radius: 12px;
+  cursor: pointer;
+  background-color: white;
+}
+
+.filter img,
+.sort img {
+  width: 20px;
+  height: 20px;
+}
+
+.filter:hover,
+.sort:hover {
+  background-color: #efefef;
+}

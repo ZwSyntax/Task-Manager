@@ -1,20 +1,14 @@
 .nav-container {
   width: 100%;
-  margin: 10px auto;
+  margin: 5px auto;
   height: 55px;
-}
-
-.nav-container-sub {
-  max-width: 1300px;
-  width: 100%;
-  margin: auto;
   background-color: rgba(105, 92, 254, 0.23);
   border-radius: 24px;
   display: flex;
   text-align: center;
   justify-content: space-between;
   padding-inline: 20px;
-  padding-block: 16px;
+  padding-block: 20px;
   border: 1px solid #695cfe;
 }
 
@@ -93,6 +87,11 @@
   border-radius: 50%;
   border: 1px solid #4338c7;
   cursor: pointer;
+  background-color: #fafafa;
+}
+
+.theme-mode:hover {
+  background-color: #eeeeee;
 }
 
 .theme-mode img {
