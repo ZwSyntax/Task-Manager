@@ -12,6 +12,8 @@ import { TasksFilterCard } from "../UI/FunctionCard.jsx";
 import EditTask from "./EditTask.jsx";
 import { taskAction } from "../../store/tasks.js";
 import { useDispatch, useSelector } from "react-redux";
+import Message from "../UI/Message..jsx";
+import { uiAction } from "../../store/ui.js";
 
 const URL = import.meta.env.VITE_SERVER_URL;
 
@@ -25,6 +27,9 @@ const Tasks = () => {
   const [filterBy, setFilterBy] = useState("All");
   const [singleTask, setSingleTask] = useState("");
   const searchData = useSelector((state) => state.task.searchData);
+  const isMessage = useSelector((state) => state.ui.isMessage);
+  const message = useSelector((state) => state.ui.message);
+  const messageType = useSelector((state) => state.ui.messageType);
 
   const newTaskHandler = () => {
     if (!isEditTask) {
@@ -71,6 +76,9 @@ const Tasks = () => {
       })
       .catch((err) => {
         console.log(err);
+        dispatch(
+          uiAction.errorMessageHandler({ message: "Something went wrong!" }),
+        );
       });
   };
 
@@ -92,6 +100,9 @@ const Tasks = () => {
         })
         .catch((err) => {
           console.log(err);
+          dispatch(
+            uiAction.errorMessageHandler({ message: "Something went wrong!" }),
+          );
         });
     }
   };
@@ -100,8 +111,30 @@ const Tasks = () => {
     getTasks();
   }, [filterBy, sortBy, searchData]);
 
+  const closeMessage = () => {
+    dispatch(uiAction.closeMessageHandler());
+  };
+
+  useEffect(() => {
+    const messageHideHandler = setTimeout(() => {
+      dispatch(uiAction.closeMessageHandler());
+    }, 5000);
+
+    return () => {
+      clearTimeout(messageHideHandler);
+    };
+  }, [isMessage, message]);
+
   return (
     <div className={styles["tasks-container"]}>
+      {isMessage && (
+        <Message
+          message={message}
+          type={messageType}
+          closeHandler={closeMessage}
+        />
+      )}
+
       <div className={styles["task-header"]}>
         <p>Task Board</p>
         <div className={styles["task-header-options"]}>

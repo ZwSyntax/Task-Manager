@@ -9,6 +9,7 @@ import { useState } from "react";
 import { TaskOptionConfirmCard } from "../UI/FunctionCard.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { taskAction } from "../../store/tasks.js";
+import { uiAction } from "../../store/ui.js";
 
 const URL = import.meta.env.VITE_SERVER_URL;
 
@@ -74,9 +75,13 @@ const Task = ({ editTaskHandler }) => {
       .then((data) => {
         console.log(data);
         dispatch(taskAction.replaceTask({ tasks: data.data }));
+        dispatch(uiAction.messageHandler({ message: "Delete Done!" }));
       })
       .catch((err) => {
         console.log(err);
+        dispatch(
+          uiAction.errorMessageHandler({ message: "Something went wrong!" }),
+        );
       });
   };
 
@@ -102,9 +107,13 @@ const Task = ({ editTaskHandler }) => {
       .then((data) => {
         console.log(data);
         dispatch(taskAction.replaceTask({ tasks: data.data }));
+        dispatch(uiAction.messageHandler({ message: "Complete Done!" }));
       })
       .catch((err) => {
         console.log(err);
+        dispatch(
+          uiAction.errorMessageHandler({ message: "Something went wrong!" }),
+        );
       });
   };
 

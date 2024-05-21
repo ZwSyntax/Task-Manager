@@ -1,4 +1,5 @@
 import { authAction } from "./auth.js";
+import { uiAction } from "./ui.js";
 
 const URL = import.meta.env.VITE_SERVER_URL;
 
@@ -15,11 +16,29 @@ export const signupHandler = (userData) => {
       },
       body: JSON.stringify(userData),
     })
-      .then((result) => {
-        console.log(result);
+      .then((response) => {
+        if (!response.ok) {
+          const err = new Error("something went wrong");
+          err.statusCode = response.status;
+          throw err;
+        }
+        return response.json();
+      })
+      .then(() => {
+        dispatch(uiAction.messageHandler({ message: "Sign Up Successfully!" }));
       })
       .catch((err) => {
-        console.log(err);
+        if (err.statusCode === 409) {
+          dispatch(uiAction.errorMessageHandler({ message: "User Exist" }));
+        } else if (err.statusCode === 401) {
+          dispatch(
+            uiAction.errorMessageHandler({ message: "Password Not Match" }),
+          );
+        } else {
+          dispatch(
+            uiAction.errorMessageHandler({ message: "Something went wrong!" }),
+          );
+        }
       })
       .finally(() => {
         dispatch(authAction.authLoaderHandler());
@@ -50,6 +69,9 @@ export const loginHandler = (userData) => {
         console.log(data);
       })
       .catch((error) => {
+        dispatch(
+          uiAction.errorMessageHandler({ message: "Invalid Credential!" }),
+        );
         console.log(error);
       })
       .finally(() => {

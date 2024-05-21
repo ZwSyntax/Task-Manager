@@ -44,6 +44,11 @@
   background-color: #7ebe40;
 }
 
+.error-message {
+  color: red;
+  font-size: 12px;
+}
+
 @media (max-width: 900px) {
   .profile-edit-main input {
     width: 70%;

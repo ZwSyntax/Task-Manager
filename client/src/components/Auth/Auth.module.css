@@ -26,6 +26,17 @@
   font-size: 14px;
 }
 
+.auth-container-sub input.invalid {
+  border-color: red;
+  background-color: rgba(255, 0, 0, 0.09);
+}
+
+.auth-container-sub .errorText {
+  color: red;
+  font-size: 12px;
+  margin: -5px 0 10px 0;
+}
+
 .auth-container-sub button {
   width: 100px;
   padding: 8px;

@@ -63,6 +63,17 @@
   background-color: #95ce4e;
 }
 
+.invalid {
+  border: 1px solid rgba(255, 0, 0, 0.46);
+  background-color: rgba(255, 0, 0, 0.73);
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
 @media (max-width: 420px) {
   .new-task-container form {
     width: 100%;

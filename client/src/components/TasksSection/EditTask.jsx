@@ -2,6 +2,7 @@ import styles from "./NewTask.module.css";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { taskAction } from "../../store/tasks.js";
+import { uiAction } from "../../store/ui.js";
 
 const URL = import.meta.env.VITE_SERVER_URL;
 
@@ -12,6 +13,8 @@ const EditTask = ({ singleTask }) => {
     priority: "",
   });
   const [isLoader, setIsLoder] = useState(false);
+  const [isValid, setIsValid] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const taskDataHandler = (e) => {
     const { name, value } = e.target;
@@ -19,16 +22,34 @@ const EditTask = ({ singleTask }) => {
     setTaskData((prevState) => {
       return { ...prevState, [name]: value };
     });
+
+    if (name === "task") {
+      if (value.length >= 4) {
+        setIsValid(true);
+        setErrorMessage("");
+      } else {
+        setIsValid(false);
+        setErrorMessage("Task must be at least 4 characters long.");
+      }
+    }
   };
 
   useEffect(() => {
-    setTaskData((prevState) => {
-      return { ...prevState, task: "", priority: "" };
+    setTaskData({
+      task: singleTask.task,
+      priority: singleTask.priority,
     });
   }, [singleTask]);
 
   const onDataSubmit = (e) => {
     e.preventDefault();
+
+    if (taskData.task.length < 4) {
+      setIsValid(false);
+      setErrorMessage("Task must be at least 4 characters long.");
+      return;
+    }
+
     const url = URL + "edittask";
     setIsLoder(true);
     fetch(url, {
@@ -39,39 +60,34 @@ const EditTask = ({ singleTask }) => {
       },
       body: JSON.stringify({
         taskId: singleTask._id,
-        task: taskData.task || singleTask.task,
-        priority: taskData.priority || singleTask.priority,
+        task: taskData.task,
+        priority: taskData.priority,
       }),
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("task added issue");
+          throw new Error("Task update issue");
         }
-
         return response.json();
       })
       .then((data) => {
-        console.log(data);
-
-        setTaskData((prevState) => {
-          return {
-            ...prevState,
-            task: data.singleTask.task,
-            priority: data.singleTask.priority,
-          };
+        setTaskData({
+          task: data.singleTask.task,
+          priority: data.singleTask.priority,
         });
         dispatch(taskAction.replaceTask({ tasks: data.data }));
-        console.log(data);
+        dispatch(uiAction.messageHandler({ message: "Edit Done!" }));
       })
       .catch((err) => {
         console.log(err);
+        dispatch(
+          uiAction.errorMessageHandler({ message: "Something went wrong!" }),
+        );
       })
       .finally(() => {
         setIsLoder(false);
       });
   };
-
-  console.log(taskData);
 
   return (
     <div className={styles["new-task-container"]}>
@@ -82,14 +98,18 @@ const EditTask = ({ singleTask }) => {
             onChange={taskDataHandler}
             type={"text"}
             id={"newtask"}
-            placeholder={"Add New Task"}
+            placeholder={"Edit Task"}
             name={"task"}
-            value={taskData.task || singleTask?.task}
+            value={taskData.task}
+            className={!isValid ? styles.invalid : ""}
           />
+          {!isValid && (
+            <p className={styles["error-message"]}>{errorMessage}</p>
+          )}
           <label htmlFor={"pri"}>Priority</label>
           <select
             onChange={taskDataHandler}
-            value={taskData.priority || singleTask.priority}
+            value={taskData.priority}
             id={"pri"}
             name={"priority"}
           >

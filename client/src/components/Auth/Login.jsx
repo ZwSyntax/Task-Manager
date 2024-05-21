@@ -11,39 +11,76 @@ const Login = () => {
     password: "",
   });
 
+  const [inputValidity, setInputValidity] = useState({
+    email: true,
+    password: true,
+  });
+
   const userDataHandler = (e) => {
     const { name, value } = e.target;
-    setUserData((prevState) => {
-      return { ...prevState, [name]: value };
-    });
+    setUserData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+
+    setInputValidity((prevState) => ({
+      ...prevState,
+      [name]:
+        name === "password" ? value.trim().length >= 6 : value.trim() !== "",
+    }));
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    const emailIsValid = userData.email.trim() !== "";
+    const passwordIsValid = userData.password.trim().length >= 6;
+
+    setInputValidity({
+      email: emailIsValid,
+      password: passwordIsValid,
+    });
+
+    if (!emailIsValid || !passwordIsValid) {
+      return;
+    }
+
     dispatch(loginHandler(userData));
   };
 
   return (
     <div className={styles["auth-container-sub"]}>
       <form onSubmit={submitHandler}>
-        <label htmlFor={"email"}>Email</label>
+        <label htmlFor="email">Email</label>
         <input
           onChange={userDataHandler}
           value={userData.email}
-          type={"text"}
-          id={"email"}
-          name={"email"}
-          placeholder={"Your email here..."}
+          type="text"
+          id="email"
+          name="email"
+          placeholder="Your email here..."
+          className={inputValidity.email ? "" : styles.invalid}
         />
-        <label htmlFor={"password"}>Password</label>
+        {!inputValidity.email && (
+          <p className={styles.errorText}>Please enter a valid email.</p>
+        )}
+
+        <label htmlFor="password">Password</label>
         <input
-          type={"password"}
-          id={"password"}
+          type="password"
+          id="password"
           onChange={userDataHandler}
-          placeholder={"Your password ..."}
-          name={"password"}
+          placeholder="Your password ..."
+          name="password"
           value={userData.password}
+          className={inputValidity.password ? "" : styles.invalid}
         />
+        {!inputValidity.password && (
+          <p className={styles.errorText}>
+            Password must be at least 6 characters long.
+          </p>
+        )}
+
         <button type="submit">{isAuthLoader ? "Loading..." : "Login"}</button>
       </form>
     </div>
