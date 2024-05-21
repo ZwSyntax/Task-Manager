@@ -1,5 +1,9 @@
 import express from "express";
-import { postLogin, signup } from "../controller/auth.controller.js";
+import {
+  postLogin,
+  postLogout,
+  signup,
+} from "../controller/auth.controller.js";
 import { body } from "express-validator";
 
 const routes = express.Router();
@@ -37,5 +41,7 @@ routes.post(
   ],
   postLogin,
 );
+
+routes.post("/logout", postLogout);
 
 export default routes;

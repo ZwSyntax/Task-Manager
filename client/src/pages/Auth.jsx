@@ -2,18 +2,18 @@ import Signup from "../components/Auth/Signup.jsx";
 import Login from "../components/Auth/Login.jsx";
 import styles from "./Auth.module.css";
 import { taskMasterLogo } from "../assets/index.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   const isLoginAuth = useSelector((state) => state.auth.isLogin);
 
-  // useEffect(() => {
-  //   if (isLoginAuth) {
-  //     window.open("/", "_self");
-  //   }
-  // }, [isLoginAuth]);
+  useEffect(() => {
+    if (isLoginAuth) {
+      window.open("/", "_self");
+    }
+  }, [isLoginAuth]);
 
   const authConditionHandler = (value) => {
     setIsLogin(value);

@@ -19,6 +19,11 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  expireToken: [
+    {
+      type: Object,
+    },
+  ],
   createDate: {
     type: Date,
     default: Date.now,

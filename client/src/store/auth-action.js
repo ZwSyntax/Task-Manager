@@ -61,4 +61,28 @@ export const loginHandler = (userData) => {
   };
 };
 
-export const logoutHandler = () => {};
+export const logoutHandler = () => {
+  return (dispatch) => {
+    const url = URL + "auth/logout";
+
+    fetch(url, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        dispatch(authAction.logoutHandler());
+      });
+  };
+};

@@ -139,3 +139,23 @@ export const postLogin = (req, res, next) => {
       next(err);
     });
 };
+
+export const postLogout = (req, res, next) => {
+  const cookieDomain = process.env.COOKIE_DOMAIN.trim();
+  const isProduction = process.env.ISPRODUCTION;
+  const cookieExpire = process.env.COOKIE_EXPIRE;
+
+  const options = {
+    maxAge: cookieExpire,
+    domain: cookieDomain,
+    httpOnly: true,
+  };
+
+  if (isProduction === "true") {
+    options.secure = true;
+    options.sameSite = "None";
+  }
+  res.clearCookie("user_token", options);
+  res.clearCookie("isLogin", options);
+  res.status(200).json({ messgae: "logout done" });
+};

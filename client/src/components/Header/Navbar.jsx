@@ -8,11 +8,14 @@ import {
 } from "../../assets/index.js";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logoutHandler } from "../../store/auth-action.js";
 
 const Navbar = () => {
   const [isShowSeach, setShowSeach] = useState(false);
   const [isProfile, setIsProfile] = useState(false);
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const showSeachHandler = (value) => {
     setShowSeach(value);
@@ -26,6 +29,10 @@ const Navbar = () => {
 
   const goToIndex = () => {
     window.open("/", "_self");
+  };
+
+  const logoutHandlers = () => {
+    dispatch(logoutHandler());
   };
 
   return (
@@ -77,10 +84,13 @@ const Navbar = () => {
                   <p>Profile</p>
                 </div>
               </Link>
-              <Link to={"/logout"}>
+              <Link to={"/login"}>
                 <div
                   className={styles["logout"]}
-                  onClick={(e) => profileHandler(false, e)}
+                  onClick={(e) => {
+                    profileHandler(false, e);
+                    logoutHandlers();
+                  }}
                 >
                   <p>Log out</p>
                 </div>
