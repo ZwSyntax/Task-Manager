@@ -171,11 +171,16 @@ td {
   gap: 5px;
 }
 
-.dot {
+.dot,
+.orange-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background-color: green;
+}
+
+.orange-dot {
+  background-color: orangered;
 }
 
 @media (max-width: 850px) {

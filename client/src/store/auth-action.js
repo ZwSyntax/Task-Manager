@@ -1,5 +1,4 @@
 import { authAction } from "./auth.js";
-import Cookies from "js-cookie";
 
 const URL = import.meta.env.VITE_SERVER_URL;
 
@@ -48,9 +47,7 @@ export const loginHandler = (userData) => {
         return response.json();
       })
       .then((data) => {
-        const userToken = Cookies.get("user_token");
-        const isLogin = Cookies.get("isLogin");
-        console.log(data, userToken, isLogin);
+        console.log(data);
       })
       .catch((error) => {
         console.log(error);

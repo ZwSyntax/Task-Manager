@@ -127,7 +127,7 @@ export const postLogin = (req, res, next) => {
       }
 
       res.cookie("user_token", token, options);
-      res.cookie("isLogin", "true", options);
+      res.cookie("isLogin", true, { ...options, httpOnly: false });
       res.status(200).json({
         message: "login done",
       });

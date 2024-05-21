@@ -1,4 +1,4 @@
-exports.getCookieValue = (cookieString, cookieName) => {
+export const getCookieValue = (cookieString, cookieName) => {
   try {
     const cookies = cookieString.split(";").map((cookie) => cookie.trim());
 
