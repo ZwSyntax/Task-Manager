@@ -170,7 +170,7 @@ const Task = ({ editTaskHandler }) => {
                       <p
                         onClick={(e) => {
                           optionShowHandler(e, null);
-                          editTaskHandler();
+                          editTaskHandler(task._id);
                         }}
                       >
                         Edit

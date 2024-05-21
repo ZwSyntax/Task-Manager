@@ -2,6 +2,7 @@ import express from "express";
 import {
   completeTask,
   deletTaks,
+  getSingleTask,
   getTask,
   postTask,
 } from "../controller/task.controller.js";
@@ -26,5 +27,6 @@ routes.post(
 routes.get("/task", validateAuth, getTask);
 routes.delete("/task", validateAuth, deletTaks);
 routes.patch("/task", validateAuth, completeTask);
+routes.get("/singletask", validateAuth, getSingleTask);
 
 export default routes;

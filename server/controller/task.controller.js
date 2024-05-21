@@ -158,3 +158,24 @@ export const completeTask = (req, res, next) => {
       next(err);
     });
 };
+
+export const getSingleTask = (req, res, next) => {
+  const { taskId } = req.query;
+
+  Task.findById(taskId)
+    .then((taskData) => {
+      if (!taskData) {
+        const err = new Error("not task found");
+        err.statusCode = 401;
+        throw err;
+        cd;
+      }
+      res.status(200).json({ message: "delete done", data: taskData });
+    })
+    .catch((err) => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
+};

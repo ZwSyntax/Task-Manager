@@ -69,7 +69,7 @@ const NewTask = () => {
             name={"task"}
             value={taskData.task}
           />
-          <label htmlFor={"conpass"}>Priority</label>
+          <label htmlFor={"pri"}>Priority</label>
           <select
             id={"pri"}
             name={"priority"}

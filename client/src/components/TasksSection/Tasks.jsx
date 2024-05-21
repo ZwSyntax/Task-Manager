@@ -23,6 +23,7 @@ const Tasks = () => {
   const [isShortShow, setIsShortShow] = useState(false);
   const [sortBy, setSortBy] = useState("Default");
   const [filterBy, setFilterBy] = useState("All");
+  const [singleTask, setSingleTask] = useState("");
 
   const newTaskHandler = () => {
     if (!isEditTask) {
@@ -45,9 +46,31 @@ const Tasks = () => {
     setSortBy(data);
   };
 
-  const editTaskHandler = () => {
+  const editTaskHandler = (data) => {
     setEditTask(true);
     setIsNewTask(false);
+    window.scrollTo(0, 0);
+
+    const url = URL + `singletask?taskId=${data}`;
+    fetch(url, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("task delete issue");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setSingleTask(data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const getTasks = () => {
@@ -130,7 +153,7 @@ const Tasks = () => {
         </div>
       </div>
       {isNewTask && <NewTask />}
-      {isEditTask && <EditTask />}
+      {isEditTask && <EditTask singleTask={singleTask} />}
       <Task editTaskHandler={editTaskHandler} />
     </div>
   );
