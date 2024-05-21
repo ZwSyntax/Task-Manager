@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { TasksFilterCard } from "../UI/FunctionCard.jsx";
 import EditTask from "./EditTask.jsx";
 import { taskAction } from "../../store/tasks.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const URL = import.meta.env.VITE_SERVER_URL;
 
@@ -24,6 +24,7 @@ const Tasks = () => {
   const [sortBy, setSortBy] = useState("Default");
   const [filterBy, setFilterBy] = useState("All");
   const [singleTask, setSingleTask] = useState("");
+  const searchData = useSelector((state) => state.task.searchData);
 
   const newTaskHandler = () => {
     if (!isEditTask) {
@@ -74,14 +75,10 @@ const Tasks = () => {
   };
 
   const getTasks = () => {
-    console.log(sortBy, filterBy);
-
     if (sortBy && filterBy) {
       const url =
         URL +
-        `task?sorts=${sortBy === "Default" ? "" : sortBy}&filter=${filterBy === "All" ? "" : filterBy}`;
-
-      console.log(url);
+        `task?sorts=${sortBy === "Default" ? "" : sortBy}&filter=${filterBy === "All" ? "" : filterBy}&search=${searchData}`;
 
       fetch(url, { method: "GET", credentials: "include" })
         .then((response) => {
@@ -101,7 +98,7 @@ const Tasks = () => {
 
   useEffect(() => {
     getTasks();
-  }, [filterBy, sortBy]);
+  }, [filterBy, sortBy, searchData]);
 
   return (
     <div className={styles["tasks-container"]}>

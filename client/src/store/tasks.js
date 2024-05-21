@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   tasks: [],
+  searchData: "",
 };
 
 const taskSlice = createSlice({
@@ -13,6 +14,9 @@ const taskSlice = createSlice({
     },
     replaceTask(state, action) {
       state.tasks = action.payload.tasks;
+    },
+    replaceSearchData(state, action) {
+      state.searchData = action.payload.data;
     },
   },
 });

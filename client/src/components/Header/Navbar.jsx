@@ -6,16 +6,18 @@ import {
   taskMasterLogo,
   userLogo,
 } from "../../assets/index.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logoutHandler } from "../../store/auth-action.js";
+import { taskAction } from "../../store/tasks.js";
 
 const Navbar = () => {
   const [isShowSeach, setShowSeach] = useState(false);
   const [isProfile, setIsProfile] = useState(false);
   const location = useLocation();
   const dispatch = useDispatch();
+  const [searchData, setSearchData] = useState("");
 
   const showSeachHandler = (value) => {
     setShowSeach(value);
@@ -35,6 +37,24 @@ const Navbar = () => {
     dispatch(logoutHandler());
   };
 
+  const searchDataHandler = (e) => {
+    setSearchData(e.target.value);
+  };
+
+  const searchHandler = () => {
+    dispatch(taskAction.replaceSearchData({ data: searchData }));
+  };
+
+  useEffect(() => {
+    const searchTimeOut = setTimeout(() => {
+      dispatch(taskAction.replaceSearchData({ data: searchData }));
+    }, 500);
+
+    return () => {
+      clearTimeout(searchTimeOut);
+    };
+  }, [searchData]);
+
   return (
     <nav className={styles["nav-container"]}>
       <div className={styles["nav-container__logo"]} onClick={goToIndex}>
@@ -47,10 +67,14 @@ const Navbar = () => {
           <div
             className={`${styles["search"]} ${isShowSeach ? styles["show-search"] : ""}`}
           >
-            <button onMouseEnter={() => showSeachHandler(true)}>
+            <button
+              onClick={searchHandler}
+              onMouseEnter={() => showSeachHandler(true)}
+            >
               <img src={searchLightLogo} alt={"searchLogo"} />
             </button>
             <input
+              onChange={searchDataHandler}
               autoComplete={"off"}
               type="text"
               name="search"

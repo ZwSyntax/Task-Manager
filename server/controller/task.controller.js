@@ -51,7 +51,7 @@ export const postTask = (req, res, next) => {
 
 export const getTask = (req, res, next) => {
   const email = req.userEmail;
-  const { sorts, filter } = req.query;
+  const { sorts, filter, search } = req.query;
 
   user
     .findOne({ email: email })
@@ -63,6 +63,14 @@ export const getTask = (req, res, next) => {
       }
 
       let query = { user: userData._id };
+
+      if (search && search.trim().length > 0) {
+        const searchRegex = new RegExp(search, "i");
+        query = {
+          ...query,
+          task: searchRegex,
+        };
+      }
 
       if (filter.length > 0) {
         query = { ...query, status: filter };
