@@ -8,7 +8,7 @@ export const TasksFilterCard = ({ optionHandlder, options = [] }) => {
       onMouseLeave={(e) => optionHandlder(false, e)}
     >
       {options.map((option, index) => (
-        <p key={index} onClick={(e) => optionHandlder(false, e)}>
+        <p key={index} onClick={(e) => optionHandlder(false, e, option)}>
           {option}
         </p>
       ))}

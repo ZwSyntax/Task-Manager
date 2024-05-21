@@ -5,12 +5,24 @@ import {
   redFlag,
   threeDotLightLogo,
 } from "../../assets/index.js";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { TaskOptionConfirmCard } from "../UI/FunctionCard.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { taskAction } from "../../store/tasks.js";
 
 const URL = import.meta.env.VITE_SERVER_URL;
+
+const convertTimestampToIST = (timestamp) => {
+  const date = new Date(timestamp);
+  const options = {
+    timeZone: "Asia/Kolkata",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  const istDate = date.toLocaleDateString("en-US", options);
+  return istDate;
+};
 
 const Task = ({ editTaskHandler }) => {
   const [shownOptionTaskId, setShownOptionTaskId] = useState(null);
@@ -96,24 +108,6 @@ const Task = ({ editTaskHandler }) => {
       });
   };
 
-  useEffect(() => {
-    const url = URL + "task";
-
-    fetch(url, { method: "GET", credentials: "include" })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("task get issue");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        dispatch(taskAction.replaceTask({ tasks: data.data }));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [dispatch]);
-
   return (
     <div className={styles["task-container"]}>
       <table>
@@ -136,7 +130,7 @@ const Task = ({ editTaskHandler }) => {
           {taskList.map((task) => (
             <tr key={task._id}>
               <td>{task.task}</td>
-              <td>{task.createDate}</td>
+              <td>{convertTimestampToIST(task.createDate)}</td>
               <td>
                 <div className={styles["progress-section"]}>
                   <div

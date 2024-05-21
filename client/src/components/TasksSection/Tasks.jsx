@@ -7,15 +7,22 @@ import {
 } from "../../assets/index.js";
 import Task from "./Task.jsx";
 import NewTask from "./NewTask.jsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TasksFilterCard } from "../UI/FunctionCard.jsx";
 import EditTask from "./EditTask.jsx";
+import { taskAction } from "../../store/tasks.js";
+import { useDispatch } from "react-redux";
+
+const URL = import.meta.env.VITE_SERVER_URL;
 
 const Tasks = () => {
+  const dispatch = useDispatch();
   const [isNewTask, setIsNewTask] = useState(false);
   const [isEditTask, setEditTask] = useState(false);
   const [isFilterShow, setIsFilterShow] = useState(false);
   const [isShortShow, setIsShortShow] = useState(false);
+  const [sortBy, setSortBy] = useState("Default");
+  const [filterBy, setFilterBy] = useState("All");
 
   const newTaskHandler = () => {
     if (!isEditTask) {
@@ -24,22 +31,54 @@ const Tasks = () => {
     setEditTask(false);
   };
 
-  const filterHandler = (value, e) => {
+  const filterHandler = (value, e, data) => {
     e.stopPropagation();
     setIsFilterShow(value);
     setIsShortShow(false);
+    setFilterBy(data);
   };
 
-  const shorterHandler = (value, e) => {
+  const shorterHandler = (value, e, data) => {
     e.stopPropagation();
     setIsShortShow(value);
     setIsFilterShow(false);
+    setSortBy(data);
   };
 
   const editTaskHandler = () => {
     setEditTask(true);
     setIsNewTask(false);
   };
+
+  const getTasks = () => {
+    console.log(sortBy, filterBy);
+
+    if (sortBy && filterBy) {
+      const url =
+        URL +
+        `task?sorts=${sortBy === "Default" ? "" : sortBy}&filter=${filterBy === "All" ? "" : filterBy}`;
+
+      console.log(url);
+
+      fetch(url, { method: "GET", credentials: "include" })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("task get issue");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          dispatch(taskAction.replaceTask({ tasks: data.data }));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  useEffect(() => {
+    getTasks();
+  }, [filterBy, sortBy]);
 
   return (
     <div className={styles["tasks-container"]}>
@@ -62,7 +101,7 @@ const Tasks = () => {
           </div>
           <div
             className={styles["filter"]}
-            onClick={() => filterHandler(true, e)}
+            onClick={(e) => filterHandler(true, e)}
           >
             <img
               onClick={(e) => filterHandler(true, e)}
@@ -72,7 +111,7 @@ const Tasks = () => {
             {isFilterShow && (
               <TasksFilterCard
                 optionHandlder={filterHandler}
-                options={["Completed", "Pending"]}
+                options={["All", "Completed", "Pending"]}
               />
             )}
           </div>
@@ -83,7 +122,7 @@ const Tasks = () => {
             <img src={sortLightLogo} alt={"sort"} />
             {isShortShow && (
               <TasksFilterCard
-                options={["Date", "Priority"]}
+                options={["Default", "Date", "Priority"]}
                 optionHandlder={shorterHandler}
               />
             )}

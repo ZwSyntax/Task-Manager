@@ -28,8 +28,6 @@ export const validateAuth = (req, res, next) => {
     throw err;
   }
 
-  console.log(decodeToken);
-
   const userEmail = decodeToken.email;
 
   user

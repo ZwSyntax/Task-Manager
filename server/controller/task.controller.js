@@ -51,6 +51,7 @@ export const postTask = (req, res, next) => {
 
 export const getTask = (req, res, next) => {
   const email = req.userEmail;
+  const { sorts, filter } = req.query;
 
   user
     .findOne({ email: email })
@@ -61,7 +62,22 @@ export const getTask = (req, res, next) => {
         throw err;
       }
 
-      return Task.find({ user: userData._id });
+      let query = { user: userData._id };
+
+      if (filter.length > 0) {
+        query = { ...query, status: filter };
+      }
+
+      if (sorts.length > 0) {
+        let data = sorts.toLowerCase();
+        if (data === "date") {
+          return Task.find(query).sort({ createDate: -1 });
+        } else {
+          return Task.find(query).sort({ priority: -1 });
+        }
+      }
+
+      return Task.find(query);
     })
     .then((taskData) => {
       if (!taskData) {
@@ -114,7 +130,7 @@ export const deletTaks = (req, res, next) => {
 export const completeTask = (req, res, next) => {
   const { taskId } = req.body;
 
-  Task.findByIdAndUpdate(taskId, { status: "Complete" }, { new: true })
+  Task.findByIdAndUpdate(taskId, { status: "Completed" }, { new: true })
     .then((result) => {
       if (!result) {
         const err = new Error("Task not found");
