@@ -8,7 +8,7 @@
   border-collapse: collapse;
 }
 
-.task-container table tr td {
+.task-container table tbody td {
   padding-block: 10px;
   background-color: rgba(212, 209, 247, 0.27);
 }
@@ -17,7 +17,7 @@
   background-color: rgba(212, 209, 247, 0.16);
 }
 
-.task-container table tr:first-child {
+.task-container table thead tr {
   background-color: rgba(212, 209, 247, 0.56);
 }
 
@@ -176,4 +176,48 @@ td {
   height: 8px;
   border-radius: 50%;
   background-color: green;
+}
+
+@media (max-width: 850px) {
+  .task-container table th:nth-child(2) {
+    width: 150px;
+  }
+
+  .task-container table th:nth-child(3) {
+    width: 130px;
+  }
+
+  .task-container table th:nth-child(4) {
+    width: 90px;
+  }
+
+  .task-container table th:last-child {
+    width: 55px;
+  }
+  tbody {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 650px) {
+  thead tr th {
+    font-size: 14px;
+  }
+
+  tbody {
+    font-size: 14px;
+  }
+
+  .task-container table th:nth-child(2) {
+    width: 130px;
+  }
+
+  .task-container table th:nth-child(4) {
+    width: 80px;
+  }
+
+  .three-dot-option-img {
+    height: 16px;
+    width: 16px;
+  }
 }
