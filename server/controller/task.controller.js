@@ -16,7 +16,7 @@ export const postTask = (req, res, next) => {
   const { task, priority } = req.body;
 
   user
-    .findOne({ email: req.userEmail })
+    .findById(req.userId)
     .then((userData) => {
       if (!userData) {
         const err = new Error("invalid user");
@@ -50,11 +50,12 @@ export const postTask = (req, res, next) => {
 };
 
 export const getTask = (req, res, next) => {
-  const email = req.userEmail;
   const { sorts, filter, search } = req.query;
 
+  console.log(req.userId);
+
   user
-    .findOne({ email: email })
+    .findById(req.userId)
     .then((userData) => {
       if (!userData) {
         const err = new Error("invalid user");

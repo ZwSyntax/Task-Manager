@@ -80,6 +80,8 @@ export const postLogin = (req, res, next) => {
 
   const { email, password } = req.body;
 
+  let newUserData;
+
   user
     .findOne({ email: email })
     .then((userData) => {
@@ -88,6 +90,8 @@ export const postLogin = (req, res, next) => {
         error.statusCode = 403;
         return next(error);
       }
+
+      newUserData = userData;
 
       const userPassword = userData.password;
 
@@ -104,6 +108,7 @@ export const postLogin = (req, res, next) => {
       const clientUserAgent = req.headers["user-agent"];
       const token = jwt.sign(
         {
+          id: newUserData._id,
           email: email,
           userAgent: clientUserAgent,
         },

@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import authRoutes from "./routes/auth.routes.js";
 import requestIp from "request-ip";
 import taskRoutes from "./routes/task.routes.js";
+import userRoutes from "./routes/user.routes.js";
 
 const app = express();
 const port = 3030;
@@ -24,6 +25,7 @@ app.use(express.json());
 app.use(requestIp.mw());
 
 app.use(taskRoutes);
+app.use(userRoutes);
 app.use("/auth", authRoutes);
 
 app.use((error, req, res, next) => {

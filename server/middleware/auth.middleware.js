@@ -28,10 +28,10 @@ export const validateAuth = (req, res, next) => {
     throw err;
   }
 
-  const userEmail = decodeToken.email;
+  const userId = decodeToken.id;
 
   user
-    .findOne({ email: userEmail })
+    .findById(userId)
     .then((userData) => {
       if (!userData) {
         const error = Error("no user found");
@@ -40,7 +40,7 @@ export const validateAuth = (req, res, next) => {
         throw error;
       }
 
-      req.userEmail = userData.email;
+      req.userId = userData._id;
       next();
     })
     .catch((err) => {

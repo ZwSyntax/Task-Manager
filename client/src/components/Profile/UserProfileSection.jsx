@@ -2,7 +2,7 @@ import styles from "./UserProfileSection.module.css";
 import Sidebar from "./Sidebar.jsx";
 import ProfileEdit from "./ProfileEdit.jsx";
 import ProfileSecurity from "./ProfileSecurity.jsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const UserProfileSection = () => {
   const [activeSection, setActiveSection] = useState(
@@ -12,6 +12,8 @@ const UserProfileSection = () => {
   const activeSectionHandler = (value) => {
     setActiveSection(value);
   };
+
+  useEffect(() => {}, []);
 
   return (
     <div className={styles["user-profile-container"]}>
