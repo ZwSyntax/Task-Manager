@@ -9,14 +9,19 @@ import Task from "./Task.jsx";
 import NewTask from "./NewTask.jsx";
 import { useState } from "react";
 import { TasksFilterCard } from "../UI/FunctionCard.jsx";
+import EditTask from "./EditTask.jsx";
 
 const Tasks = () => {
-  const [isNewTask, setIsNewTask] = useState(true);
+  const [isNewTask, setIsNewTask] = useState(false);
+  const [isEditTask, setEditTask] = useState(false);
   const [isFilterShow, setIsFilterShow] = useState(false);
   const [isShortShow, setIsShortShow] = useState(false);
 
   const newTaskHandler = () => {
-    setIsNewTask((pre) => !pre);
+    if (!isEditTask) {
+      setIsNewTask((pre) => !pre);
+    }
+    setEditTask(false);
   };
 
   const filterHandler = (value, e) => {
@@ -31,6 +36,11 @@ const Tasks = () => {
     setIsFilterShow(false);
   };
 
+  const editTaskHandler = () => {
+    setEditTask(true);
+    setIsNewTask(false);
+  };
+
   return (
     <div className={styles["tasks-container"]}>
       <div className={styles["task-header"]}>
@@ -38,12 +48,17 @@ const Tasks = () => {
         <div className={styles["task-header-options"]}>
           <div
             onClick={newTaskHandler}
-            className={`${styles["create-task"]} ${isNewTask ? styles["close-task"] : ""}`}
+            className={`${styles["create-task"]} ${isNewTask ? styles["close-task"] : ""} ${isEditTask ? styles["close-task"] : ""}`}
           >
             <div className={styles["create-task-logo"]}>
-              <img src={isNewTask ? crosLight : plusLogo} alt={"plusLogo"} />
+              <img
+                src={isNewTask ? crosLight : isEditTask ? crosLight : plusLogo}
+                alt={"plusLogo"}
+              />
             </div>
-            {isNewTask ? <p>Close New</p> : <p>Add New</p>}
+            {isNewTask && <p>Close New</p>}{" "}
+            {!isEditTask && !isNewTask && <p>Add New</p>}{" "}
+            {isEditTask && <p>Close Edit</p>}
           </div>
           <div
             className={styles["filter"]}
@@ -76,7 +91,8 @@ const Tasks = () => {
         </div>
       </div>
       {isNewTask && <NewTask />}
-      <Task />
+      {isEditTask && <EditTask />}
+      <Task editTaskHandler={editTaskHandler} />
     </div>
   );
 };

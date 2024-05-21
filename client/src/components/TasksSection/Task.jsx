@@ -3,7 +3,7 @@ import { redFlag, threeDotLightLogo } from "../../assets/index.js";
 import { useState } from "react";
 import { TaskOptionConfirmCard } from "../UI/FunctionCard.jsx";
 
-const Task = () => {
+const Task = ({ editTaskHandler }) => {
   const [isOptionShown, setIsOptionShown] = useState(false);
   const [isDeleteConfirmShow, setIsDeleteConfirmShow] = useState(false);
   const [isCompleteConfirmShow, setIsCompleteConfirmShow] = useState(false);
@@ -117,7 +117,14 @@ const Task = () => {
                   className={styles["three-dot-option"]}
                   onMouseLeave={(e) => optionShowHandler(e, false)}
                 >
-                  <p onClick={(e) => optionShowHandler(e, false)}>Edit</p>
+                  <p
+                    onClick={(e) => {
+                      optionShowHandler(e, false);
+                      editTaskHandler();
+                    }}
+                  >
+                    Edit
+                  </p>
                   <p
                     onClick={(e) => {
                       optionShowHandler(e, false);
