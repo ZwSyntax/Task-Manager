@@ -110,3 +110,35 @@ export const deletTaks = (req, res, next) => {
       next(err);
     });
 };
+
+export const completeTask = (req, res, next) => {
+  const { taskId } = req.body;
+
+  Task.findByIdAndUpdate(taskId, { status: "Complete" }, { new: true })
+    .then((result) => {
+      if (!result) {
+        const err = new Error("Task not found");
+        err.statusCode = 404;
+        throw err;
+      }
+
+      return Task.find({ user: result.user });
+    })
+    .then((taskData) => {
+      if (!taskData) {
+        const err = new Error("No tasks found");
+        err.statusCode = 404;
+        throw err;
+      }
+      res
+        .status(200)
+        .json({ message: "Task marked as complete", data: taskData });
+    })
+    .catch((err) => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+
+      next(err);
+    });
+};

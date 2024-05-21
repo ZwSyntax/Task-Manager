@@ -1,5 +1,10 @@
 import express from "express";
-import { deletTaks, getTask, postTask } from "../controller/task.controller.js";
+import {
+  completeTask,
+  deletTaks,
+  getTask,
+  postTask,
+} from "../controller/task.controller.js";
 import { body } from "express-validator";
 import { validateAuth } from "../middleware/auth.middleware.js";
 
@@ -20,5 +25,6 @@ routes.post(
 
 routes.get("/task", validateAuth, getTask);
 routes.delete("/task", validateAuth, deletTaks);
+routes.patch("/task", validateAuth, completeTask);
 
 export default routes;

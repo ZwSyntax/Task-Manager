@@ -70,8 +70,30 @@ const Task = ({ editTaskHandler }) => {
 
   const completeOnConfirmHandler = (e, taskId) => {
     e.stopPropagation();
-    console.log("confirm", taskId);
     setConfirmType(null);
+    const url = URL + "task";
+
+    fetch(url, {
+      method: "PATCH",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ taskId }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("task delete issue");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        dispatch(taskAction.replaceTask({ tasks: data.data }));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {
