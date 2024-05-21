@@ -1,13 +1,50 @@
 import styles from "./Task.module.css";
 import { redFlag, threeDotLightLogo } from "../../assets/index.js";
 import { useState } from "react";
+import { TaskOptionConfirmCard } from "../UI/FunctionCard.jsx";
 
 const Task = () => {
   const [isOptionShown, setIsOptionShown] = useState(false);
+  const [isDeleteConfirmShow, setIsDeleteConfirmShow] = useState(false);
+  const [isCompleteConfirmShow, setIsCompleteConfirmShow] = useState(false);
 
   const optionShowHandler = (e, value) => {
     e.stopPropagation();
     setIsOptionShown(value);
+    setIsDeleteConfirmShow(false);
+    setIsCompleteConfirmShow(false);
+  };
+
+  const onDeleteClicked = (e) => {
+    e.stopPropagation();
+    setIsDeleteConfirmShow(true);
+    setIsCompleteConfirmShow(false);
+  };
+
+  const onCompleteClicked = (e) => {
+    e.stopPropagation();
+    setIsDeleteConfirmShow(false);
+    setIsCompleteConfirmShow(true);
+  };
+
+  const confirmOptionCloseHandler = (e) => {
+    e.stopPropagation();
+    setIsDeleteConfirmShow(false);
+    setIsCompleteConfirmShow(false);
+  };
+
+  const deleteOnConfirmHandler = (e) => {
+    e.stopPropagation();
+    console.log("delete");
+    setIsDeleteConfirmShow(false);
+    setIsCompleteConfirmShow(false);
+  };
+
+  const completeOnConfirmHandler = (e) => {
+    e.stopPropagation();
+    console.log("confirm");
+    setIsDeleteConfirmShow(false);
+    setIsCompleteConfirmShow(false);
   };
 
   return (
@@ -81,11 +118,34 @@ const Task = () => {
                   onMouseLeave={(e) => optionShowHandler(e, false)}
                 >
                   <p onClick={(e) => optionShowHandler(e, false)}>Edit</p>
-                  <p onClick={(e) => optionShowHandler(e, false)}>Delete</p>
-                  <p onClick={(e) => optionShowHandler(e, false)}>
+                  <p
+                    onClick={(e) => {
+                      optionShowHandler(e, false);
+                      onDeleteClicked(e);
+                    }}
+                  >
+                    Delete
+                  </p>
+                  <p
+                    onClick={(e) => {
+                      optionShowHandler(e, false), onCompleteClicked(e);
+                    }}
+                  >
                     Marked Complete
                   </p>
                 </div>
+              )}
+              {isDeleteConfirmShow && (
+                <TaskOptionConfirmCard
+                  closeHander={confirmOptionCloseHandler}
+                  optionHandeler={deleteOnConfirmHandler}
+                />
+              )}
+              {isCompleteConfirmShow && (
+                <TaskOptionConfirmCard
+                  closeHander={confirmOptionCloseHandler}
+                  optionHandeler={completeOnConfirmHandler}
+                />
               )}
             </div>
           </td>

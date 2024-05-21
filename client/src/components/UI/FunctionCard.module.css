@@ -1,0 +1,106 @@
+.filter-options,
+.sort-options {
+  position: absolute;
+  bottom: -120px;
+  background-color: rgba(68, 19, 101, 0.07);
+  z-index: 4;
+  border-radius: 8px;
+  border: 1px solid #4338c7;
+  backdrop-filter: blur(40px);
+  padding-top: 28px;
+}
+
+.sort-options {
+  right: 0px;
+}
+
+.filter-options p,
+.sort-options p {
+  font-size: 15px;
+  padding: 5px 8px;
+  background-color: rgba(73, 24, 169, 0.21);
+  margin: 5px;
+  border-radius: 5px;
+}
+
+.filter-options p:hover,
+.sort-options p:hover {
+  background-color: rgba(73, 24, 169, 0.3);
+}
+.filter-cross {
+  width: 28px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  border: 1px solid #4338c7;
+  background-color: rgba(95, 37, 201, 0.14);
+  top: 3px;
+  right: 3px;
+  border-radius: 5px;
+}
+
+.filter-cross:hover {
+  background-color: rgba(95, 37, 201, 0.22);
+}
+
+.confirm-card-main {
+  position: absolute;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 150px;
+  background-color: rgba(68, 19, 101, 0.07);
+  z-index: 4;
+  border-radius: 8px;
+  border: 1px solid #4338c7;
+  backdrop-filter: blur(40px);
+  padding: 8px 5px;
+  left: -160px;
+  top: -20px;
+}
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+  gap: 10px;
+}
+
+.option-correct,
+.option-cross {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.option-correct img,
+.option-cross img {
+  width: 26px;
+  height: 26px;
+}
+
+.option-correct {
+  background-color: rgba(135, 210, 62, 0.79);
+  border: 1px solid #04ce28;
+}
+
+.option-cross {
+  background-color: rgba(255, 0, 0, 0.62);
+  border: 1px solid #e30404;
+}
+
+.option-correct:hover {
+  background-color: rgba(91, 168, 16, 0.89);
+  border: 1px solid #04ce28;
+}
+
+.option-cross:hover {
+  background-color: rgba(255, 0, 0, 0.71);
+  border: 1px solid #e30404;
+}

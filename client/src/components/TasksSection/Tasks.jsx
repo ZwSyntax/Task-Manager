@@ -8,6 +8,7 @@ import {
 import Task from "./Task.jsx";
 import NewTask from "./NewTask.jsx";
 import { useState } from "react";
+import { TasksFilterCard } from "../UI/FunctionCard.jsx";
 
 const Tasks = () => {
   const [isNewTask, setIsNewTask] = useState(true);
@@ -54,19 +55,10 @@ const Tasks = () => {
               alt={"filter"}
             />
             {isFilterShow && (
-              <div
-                className={styles["filter-options"]}
-                onMouseLeave={(e) => filterHandler(false, e)}
-              >
-                <p onClick={(e) => filterHandler(false, e)}>Completed</p>
-                <p onClick={(e) => filterHandler(false, e)}>Pending</p>
-                <div
-                  onClick={(e) => filterHandler(false, e)}
-                  className={styles["filter-cross"]}
-                >
-                  <img src={crosLight} alt={"cross"} />
-                </div>
-              </div>
+              <TasksFilterCard
+                optionHandlder={filterHandler}
+                options={["Completed", "Pending"]}
+              />
             )}
           </div>
           <div
@@ -75,19 +67,10 @@ const Tasks = () => {
           >
             <img src={sortLightLogo} alt={"sort"} />
             {isShortShow && (
-              <div
-                className={styles["sort-options"]}
-                onMouseLeave={(e) => shorterHandler(false, e)}
-              >
-                <p onClick={(e) => shorterHandler(false, e)}>Date</p>
-                <p onClick={(e) => shorterHandler(false, e)}>Priority</p>
-                <div
-                  onClick={(e) => shorterHandler(false, e)}
-                  className={styles["filter-cross"]}
-                >
-                  <img src={crosLight} alt={"cross"} />
-                </div>
-              </div>
+              <TasksFilterCard
+                options={["Date", "Priority"]}
+                optionHandlder={shorterHandler}
+              />
             )}
           </div>
         </div>
