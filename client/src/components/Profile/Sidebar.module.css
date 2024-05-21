@@ -41,3 +41,31 @@
   width: 32px;
   height: 32px;
 }
+
+@media (max-width: 600px) {
+  .sidebar-container {
+    padding-inline: 5px;
+    margin-left: 2px;
+  }
+  .sidebar-profile,
+  .sidebar-security {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 500px) {
+  .sidebar-profile,
+  .sidebar-security {
+    padding-inline: 5px;
+    padding-block: 5px;
+  }
+
+  .sidebar-container p {
+    display: none;
+  }
+
+  .sidebar-container img {
+    width: 24px;
+    height: 24px;
+  }
+}

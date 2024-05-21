@@ -62,3 +62,13 @@
 .new-task-container-sub button:hover {
   background-color: #95ce4e;
 }
+
+@media (max-width: 420px) {
+  .new-task-container form {
+    width: 100%;
+  }
+
+  .new-task-container input {
+    width: 100%;
+  }
+}
