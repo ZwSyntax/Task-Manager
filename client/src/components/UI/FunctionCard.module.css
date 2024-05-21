@@ -1,17 +1,14 @@
 .filter-options,
 .sort-options {
   position: absolute;
-  bottom: -120px;
+  bottom: -160px;
   background-color: rgba(68, 19, 101, 0.07);
   z-index: 4;
   border-radius: 8px;
   border: 1px solid #4338c7;
   backdrop-filter: blur(40px);
   padding-top: 28px;
-}
-
-.sort-options {
-  right: 0px;
+  left: -60px;
 }
 
 .filter-options p,

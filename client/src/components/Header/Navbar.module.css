@@ -63,7 +63,7 @@
   color: #313131;
   padding-right: 35px;
   transition: 0.4s ease-in-out;
-  background-color: rgba(105, 92, 254, 0.63);
+  background-color: rgb(105 92 254 / 33%);
 }
 
 .show-search input {
@@ -117,7 +117,7 @@
 .profile-options {
   position: absolute;
   bottom: -165px;
-  left: -142px;
+  left: -160px;
   z-index: 4;
   background-color: rgba(212, 209, 253, 0.44);
   width: 200px;

@@ -1,6 +1,9 @@
 .task-container {
   width: 100%;
   margin-top: 25px;
+  padding-top: 20px;
+  padding-bottom: 90px;
+  overflow-x: auto;
 }
 
 .task-container table {
@@ -13,7 +16,7 @@
   background-color: rgba(212, 209, 247, 0.27);
 }
 
-.task-container table tr:hover {
+.task-container table tbody tr:hover {
   background-color: rgba(212, 209, 247, 0.16);
 }
 

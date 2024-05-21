@@ -2,7 +2,6 @@ import styles from "./Navbar.module.css";
 import {
   crosLight,
   searchLightLogo,
-  sunLogo,
   taskMasterLogo,
   userLogo,
 } from "../../assets/index.js";
@@ -87,9 +86,9 @@ const Navbar = () => {
           ""
         )}
 
-        <div className={styles["theme-mode"]}>
-          <img src={sunLogo} alt={"sunLogo"} />
-        </div>
+        {/*<div className={styles["theme-mode"]}>*/}
+        {/*  <img src={sunLogo} alt={"sunLogo"} />*/}
+        {/*</div>*/}
         <div
           className={styles["profile-logo"]}
           onClick={(e) => profileHandler(true, e)}
