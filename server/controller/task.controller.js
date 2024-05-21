@@ -179,3 +179,51 @@ export const getSingleTask = (req, res, next) => {
       next(err);
     });
 };
+
+export const editTask = (req, res, next) => {
+  const error = validationResult(req);
+
+  if (!error.isEmpty()) {
+    const err = new Error("Validation Error");
+    err.statusCode = 403;
+    const errArray = error.array();
+    err.data = errArray[0].msg;
+    throw err;
+  }
+
+  const { taskId, task, priority } = req.body;
+
+  let singleTask;
+
+  Task.findByIdAndUpdate(
+    taskId,
+    { task: task, priority: priority },
+    { new: true },
+  )
+    .then((result) => {
+      if (!result) {
+        const err = new Error("Task not found");
+        err.statusCode = 404;
+        throw err;
+      }
+      singleTask = result;
+      return Task.find({ user: result.user });
+    })
+    .then((taskData) => {
+      if (!taskData) {
+        const err = new Error("No tasks found");
+        err.statusCode = 404;
+        throw err;
+      }
+      res
+        .status(201)
+        .json({ message: "task edit done", data: taskData, singleTask });
+    })
+    .catch((err) => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+
+      next(err);
+    });
+};
