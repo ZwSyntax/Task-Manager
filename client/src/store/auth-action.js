@@ -63,10 +63,12 @@ export const loginHandler = (userData) => {
           throw new Error("Invalid login");
         }
         dispatch(authAction.loginHandler());
+        localStorage.setItem("isLogin", "true");
         return response.json();
       })
       .then((data) => {
         console.log(data);
+        dispatch();
       })
       .catch((error) => {
         dispatch(
@@ -102,6 +104,7 @@ export const logoutHandler = () => {
       })
       .finally(() => {
         dispatch(authAction.logoutHandler());
+        localStorage.removeItem("isLogin");
       });
   };
 };

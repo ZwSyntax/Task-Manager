@@ -132,11 +132,7 @@ export const postLogin = (req, res, next) => {
       }
 
       res.cookie("user_token", token, options);
-      res.cookie("isLogin", true, {
-        ...options,
-        httpOnly: false,
-        secure: false,
-      });
+      res.cookie("isLogin", true, { ...options, httpOnly: false });
       res.status(200).json({
         message: "login done",
       });
@@ -165,6 +161,6 @@ export const postLogout = (req, res, next) => {
     options.sameSite = "None";
   }
   res.clearCookie("user_token", options);
-  res.clearCookie("isLogin", { ...options, secure: false });
+  res.clearCookie("isLogin", options);
   res.status(200).json({ messgae: "logout done" });
 };

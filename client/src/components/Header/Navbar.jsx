@@ -34,6 +34,7 @@ const Navbar = () => {
 
   const logoutHandlers = () => {
     dispatch(logoutHandler());
+    window.open("/login", "_self");
   };
 
   const searchDataHandler = (e) => {
@@ -85,10 +86,6 @@ const Navbar = () => {
         ) : (
           ""
         )}
-
-        {/*<div className={styles["theme-mode"]}>*/}
-        {/*  <img src={sunLogo} alt={"sunLogo"} />*/}
-        {/*</div>*/}
         <div
           className={styles["profile-logo"]}
           onClick={(e) => profileHandler(true, e)}
@@ -107,17 +104,17 @@ const Navbar = () => {
                   <p>Profile</p>
                 </div>
               </Link>
-              <Link to={"/login"}>
-                <div
-                  className={styles["logout"]}
-                  onClick={(e) => {
-                    profileHandler(false, e);
-                    logoutHandlers();
-                  }}
-                >
-                  <p>Log out</p>
-                </div>
-              </Link>
+
+              <div
+                className={styles["logout"]}
+                onClick={(e) => {
+                  profileHandler(false, e);
+                  logoutHandlers();
+                }}
+              >
+                <p>Log out</p>
+              </div>
+
               <div
                 className={styles["cross"]}
                 onClick={(e) => profileHandler(false, e)}
