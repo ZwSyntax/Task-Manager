@@ -32,11 +32,11 @@ export const signupHandler = (userData) => {
           dispatch(uiAction.errorMessageHandler({ message: "User Exist" }));
         } else if (err.statusCode === 401) {
           dispatch(
-            uiAction.errorMessageHandler({ message: "Password Not Match" }),
+            uiAction.errorMessageHandler({ message: "Password Not Match" })
           );
         } else {
           dispatch(
-            uiAction.errorMessageHandler({ message: "Something went wrong!" }),
+            uiAction.errorMessageHandler({ message: "Something went wrong!" })
           );
         }
       })
@@ -71,7 +71,7 @@ export const loginHandler = (userData) => {
       })
       .catch((error) => {
         dispatch(
-          uiAction.errorMessageHandler({ message: "Invalid Credential!" }),
+          uiAction.errorMessageHandler({ message: "Invalid Credential!" })
         );
         console.log(error);
       })
@@ -104,6 +104,8 @@ export const logoutHandler = () => {
       .finally(() => {
         dispatch(authAction.logoutHandler());
         localStorage.removeItem("isLogin");
+        localStorage.removeItem("active-profile");
+        window.open("/login", "_self");
       });
   };
 };

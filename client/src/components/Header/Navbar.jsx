@@ -34,7 +34,6 @@ const Navbar = () => {
 
   const logoutHandlers = () => {
     dispatch(logoutHandler());
-    window.open("/login", "_self");
   };
 
   const searchDataHandler = (e) => {
@@ -65,7 +64,9 @@ const Navbar = () => {
       <div className={styles["action-container"]}>
         {location.pathname === "/" ? (
           <div
-            className={`${styles["search"]} ${isShowSeach ? styles["show-search"] : ""}`}
+            className={`${styles["search"]} ${
+              isShowSeach ? styles["show-search"] : ""
+            }`}
           >
             <button
               onClick={searchHandler}
