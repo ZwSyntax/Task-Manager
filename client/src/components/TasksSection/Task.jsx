@@ -218,6 +218,13 @@ const Task = ({ editTaskHandler }) => {
           ))}
         </tbody>
       </table>
+      {taskList.length === 0 && (
+        <div
+          style={{ width: "100%", margin: "20px auto", textAlign: "center" }}
+        >
+          <p>No Tasks</p>
+        </div>
+      )}
     </div>
   );
 };

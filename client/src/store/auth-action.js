@@ -62,13 +62,12 @@ export const loginHandler = (userData) => {
         if (!response.ok) {
           throw new Error("Invalid login");
         }
-        dispatch(authAction.loginHandler());
-        localStorage.setItem("isLogin", "true");
         return response.json();
       })
       .then((data) => {
         console.log(data);
-        dispatch();
+        dispatch(authAction.loginHandler());
+        localStorage.setItem("isLogin", "true");
       })
       .catch((error) => {
         dispatch(
