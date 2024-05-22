@@ -1,0 +1,53 @@
+version: "3.1"
+
+services:
+  client:
+    image: taskmaster-client-image:latest
+    container_name: taskmaster-client-container
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+
+    env_file:
+      - ./client/.env.local
+    depends_on:
+      - server
+    networks:
+      - taskmaster-network
+    develop:
+      watch:
+        - path: ./client/package.json
+          action: rebuild
+        - path: ./client/package-lock.json
+          action: rebuild
+        - path: ./client
+          target: /app
+          action: sync
+
+  server:
+    image: taskmaster-server-image:latest
+    container_name: taskmaster-server-container
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "3030:3030"
+    networks:
+      - taskmaster-network
+    env_file:
+      - ./server/.env
+    develop:
+      watch:
+        - path: ./server/package.json
+          action: rebuild
+        - path: ./server/package-lock.json
+          action: rebuild
+        - path: ./server
+          target: /app
+          action: sync
+
+networks:
+  taskmaster-network:
+    driver: bridge
